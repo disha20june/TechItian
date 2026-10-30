@@ -1,0 +1,1709 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | GovVerify AI</title>
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f5f8fc;
+            color: #14284b;
+        }
+
+        /* ================= SIDEBAR ================= */
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 270px;
+            height: 100vh;
+            background: linear-gradient(180deg, #102d55, #081d3a);
+            color: white;
+            padding: 24px 16px;
+            z-index: 1000;
+            transition: 0.3s;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0 12px 30px;
+        }
+
+        .brand-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #1677ff, #45a8ff);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 25px;
+            flex-shrink: 0;
+        }
+
+        .brand h2 {
+            font-size: 23px;
+            margin: 0;
+        }
+
+        .brand h2 span {
+            color: #55c8ff;
+        }
+
+        .brand small {
+            color: #b9cae2;
+            font-size: 12px;
+        }
+
+        .nav-menu {
+            margin-top: 10px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 17px;
+            padding: 13px 18px;
+            margin: 7px 0;
+            border-radius: 10px;
+            color: #dce7f7;
+            text-decoration: none;
+            transition: 0.25s;
+        }
+
+        .nav-item i {
+            font-size: 21px;
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            background: linear-gradient(90deg, #1769e8, #286eea);
+            color: white;
+        }
+
+        .digital-india {
+            position: absolute;
+            bottom: 30px;
+            left: 22px;
+            right: 22px;
+            padding: 22px 16px;
+            border: 1px solid rgba(100, 180, 255, 0.3);
+            border-radius: 14px;
+            background: rgba(28, 77, 135, 0.45);
+        }
+
+        .digital-india i {
+            display: block;
+            text-align: center;
+            font-size: 55px;
+            color: #72b7f8;
+            margin-bottom: 8px;
+        }
+
+        .digital-india strong {
+            display: block;
+            margin-bottom: 7px;
+        }
+
+        .digital-india p {
+            font-size: 14px;
+            line-height: 1.5;
+            color: #e4edf9;
+        }
+
+        /* ================= MAIN ================= */
+
+        .main {
+            margin-left: 270px;
+            min-height: 100vh;
+        }
+
+        /* ================= TOPBAR ================= */
+
+        .topbar {
+            height: 78px;
+            background: white;
+            border-bottom: 1px solid #e7edf5;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            position: sticky;
+            top: 0;
+            z-index: 900;
+        }
+
+        .search-box {
+            width: 420px;
+            height: 43px;
+            background: #f1f5fa;
+            border-radius: 11px;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            color: #7890ae;
+        }
+
+        .search-box i {
+            font-size: 19px;
+            margin-right: 12px;
+        }
+
+        .search-box input {
+            border: none;
+            outline: none;
+            background: transparent;
+            width: 100%;
+            color: #18335a;
+            font-size: 14px;
+        }
+
+        .profile-area {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .notification {
+            position: relative;
+            font-size: 24px;
+            color: #315477;
+            cursor: pointer;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -7px;
+            right: -8px;
+            width: 19px;
+            height: 19px;
+            border-radius: 50%;
+            background: #ef4444;
+            color: white;
+            font-size: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .profile-img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #65c7f7, #2878d8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 22px;
+        }
+
+        .profile-name {
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .profile-role {
+            color: #7185a0;
+            font-size: 12px;
+        }
+
+        /* ================= CONTENT ================= */
+
+        .content {
+            padding: 25px;
+            max-width: 1500px;
+            margin: auto;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 340px;
+            gap: 22px;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            min-height: 235px;
+            border-radius: 15px;
+            padding: 30px;
+            background: linear-gradient(110deg, #dceeff, #c7e5ff);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero h5 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .hero h1 {
+            font-size: 39px;
+            margin-bottom: 10px;
+            color: #102e59;
+        }
+
+        .hero p {
+            font-size: 17px;
+            color: #28517f;
+            max-width: 460px;
+            line-height: 1.5;
+        }
+
+        .trust-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 22px;
+            padding: 10px 16px;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.85);
+            color: #1262ca;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .hero-graphic {
+            position: absolute;
+            right: 55px;
+            bottom: -20px;
+            width: 230px;
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .document-icon {
+            width: 125px;
+            height: 155px;
+            border-radius: 12px;
+            background: white;
+            box-shadow: 0 15px 35px rgba(50, 100, 150, 0.18);
+            padding: 20px;
+            position: relative;
+        }
+
+        .document-icon i {
+            font-size: 43px;
+            color: #7d99ba;
+        }
+
+        .check-circle {
+            position: absolute;
+            right: -14px;
+            bottom: 20px;
+            width: 48px;
+            height: 48px;
+            background: #26bd78;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 25px;
+        }
+
+        /* ================= STATS ================= */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-top: 22px;
+        }
+
+        .stat-card {
+            padding: 20px;
+            border-radius: 14px;
+            background: white;
+            border: 1px solid #e0e8f3;
+            min-height: 170px;
+            transition: 0.25s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(25, 62, 100, 0.1);
+        }
+
+        .stat-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 21px;
+            margin-bottom: 15px;
+        }
+
+        .blue {
+            background: #e2efff;
+            color: #176ce5;
+        }
+
+        .orange {
+            background: #fff1d9;
+            color: #ed9b13;
+        }
+
+        .green {
+            background: #ddf7e9;
+            color: #19a86b;
+        }
+
+        .purple {
+            background: #f0e5ff;
+            color: #7e35dc;
+        }
+
+        .stat-card h4 {
+            font-size: 14px;
+            color: #35506e;
+            margin-bottom: 6px;
+        }
+
+        .stat-number {
+            font-size: 33px;
+            font-weight: 700;
+            color: #122f57;
+        }
+
+        .growth {
+            margin-top: 8px;
+            font-size: 12px;
+            color: #66809e;
+        }
+
+        /* ================= APPLICATIONS ================= */
+
+        .applications {
+            background: white;
+            border-radius: 15px;
+            margin-top: 22px;
+            padding: 22px;
+            border: 1px solid #e2eaf4;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-title-icon {
+            width: 43px;
+            height: 43px;
+            background: #e3efff;
+            color: #1670e8;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .section-title h2 {
+            font-size: 20px;
+            margin: 0;
+        }
+
+        .section-title p {
+            font-size: 13px;
+            color: #7086a2;
+            margin-top: 4px;
+        }
+
+        .new-btn {
+            border: none;
+            background: linear-gradient(90deg, #1469e8, #2778ee);
+            color: white;
+            padding: 11px 18px;
+            border-radius: 9px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            transition: 0.2s;
+        }
+
+        .new-btn:hover {
+            color: white;
+            transform: translateY(-1px);
+            box-shadow: 0 7px 18px rgba(20, 105, 232, 0.25);
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            min-width: 750px;
+        }
+
+        th {
+            text-align: left;
+            background: #f5f8fc;
+            color: #203d62;
+            padding: 14px;
+            font-size: 13px;
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 16px 14px;
+            border-bottom: 1px solid #edf1f6;
+            font-size: 13px;
+            color: #304d70;
+        }
+
+        tbody tr:hover {
+            background: #f8fbff;
+        }
+
+        .application-id {
+            font-weight: 700;
+            color: #183d70;
+        }
+
+        .service-name {
+            font-weight: 600;
+            color: #243f63;
+        }
+
+        .service-subtitle {
+            display: block;
+            font-size: 11px;
+            color: #8495aa;
+            margin-top: 4px;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 6px 13px;
+            border-radius: 20px;
+            background: #e1f0ff;
+            color: #1470df;
+            font-weight: 600;
+            font-size: 11px;
+        }
+
+        .risk {
+            display: inline-block;
+            padding: 6px 13px;
+            border-radius: 20px;
+            background: #d9f7e6;
+            color: #14955b;
+            font-weight: 600;
+            font-size: 11px;
+        }
+
+        .view-btn {
+            padding: 8px 14px;
+            border: 1px solid #d7e2ef;
+            background: white;
+            border-radius: 8px;
+            color: #28547e;
+            text-decoration: none;
+            font-size: 12px;
+            transition: 0.2s;
+        }
+
+        .view-btn:hover {
+            background: #eef6ff;
+            color: #1469e8;
+        }
+
+        /* ================= RIGHT SIDE ================= */
+
+        .quick-card {
+            background: linear-gradient(135deg, #1d75ee, #637af2);
+            border-radius: 15px;
+            overflow: hidden;
+            color: white;
+        }
+
+        .quick-header {
+            padding: 23px;
+        }
+
+        .quick-header h2 {
+            font-size: 19px;
+            margin-bottom: 8px;
+        }
+
+        .quick-header p {
+            font-size: 13px;
+            line-height: 1.5;
+            color: #edf4ff;
+        }
+
+        .quick-body {
+            background: white;
+            color: #18365b;
+            margin: 0 10px 10px;
+            border-radius: 12px;
+            padding: 5px 15px;
+        }
+
+        .quick-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 17px 5px;
+            border-bottom: 1px solid #edf1f5;
+            text-decoration: none;
+            color: #244568;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .quick-link:last-child {
+            border-bottom: none;
+        }
+
+        .quick-link:hover {
+            color: #1469e8;
+            transform: translateX(3px);
+        }
+
+        .quick-link-left {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+        }
+
+        .quick-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: #edf4ff;
+            color: #256bd1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ================= ACTIVITY ================= */
+
+        .activity {
+            background: white;
+            border: 1px solid #dfe8f2;
+            border-radius: 15px;
+            margin-top: 22px;
+            padding: 20px;
+        }
+
+        .activity h2 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .activity-subtitle {
+            color: #7890aa;
+            font-size: 12px;
+            margin-bottom: 17px;
+        }
+
+        .activity-item {
+            display: flex;
+            gap: 12px;
+            padding: 14px 0;
+            border-top: 1px solid #edf1f5;
+        }
+
+        .activity-icon {
+            min-width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .activity-content strong {
+            display: block;
+            font-size: 13px;
+            color: #244568;
+        }
+
+        .activity-content span {
+            display: block;
+            font-size: 11px;
+            color: #7d91aa;
+            margin-top: 4px;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            margin-top: 35px;
+            padding: 20px 5px;
+            border-top: 1px solid #e0e7f0;
+            display: flex;
+            justify-content: space-between;
+            color: #7187a1;
+            font-size: 12px;
+        }
+
+        /* ================= MOBILE ================= */
+
+        .menu-btn {
+            display: none;
+            border: none;
+            background: transparent;
+            font-size: 25px;
+            color: #193b65;
+            cursor: pointer;
+        }
+
+        @media (max-width: 1200px) {
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .quick-card,
+            .activity {
+                max-width: none;
+            }
+        }
+
+        @media (max-width: 900px) {
+
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.show {
+                transform: translateX(0);
+                box-shadow: 10px 0 30px rgba(0, 0, 0, 0.2);
+            }
+
+            .main {
+                margin-left: 0;
+            }
+
+            .menu-btn {
+                display: block;
+            }
+
+            .topbar {
+                padding: 0 18px;
+            }
+
+            .search-box {
+                width: 40%;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero-graphic {
+                opacity: 0.4;
+                right: 10px;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .content {
+                padding: 15px;
+            }
+
+            .topbar {
+                height: 68px;
+            }
+
+            .search-box {
+                display: none;
+            }
+
+            .profile-name,
+            .profile-role {
+                display: none;
+            }
+
+            .profile-area {
+                gap: 12px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding: 22px;
+                min-height: 250px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .hero p {
+                font-size: 14px;
+                max-width: 300px;
+            }
+
+            .hero-graphic {
+                right: -30px;
+                bottom: -25px;
+                transform: scale(0.75);
+            }
+
+            .section-header {
+                align-items: flex-start;
+                gap: 10px;
+                flex-direction: column;
+            }
+
+            .new-btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .applications {
+                padding: 15px;
+            }
+
+            .section-title h2 {
+                font-size: 18px;
+            }
+        }
+/* ================= THEME VARIABLES ================= */
+
+:root {
+    --body-bg: #f5f8fc;
+    --body-text: #14284b;
+    --card-bg: #ffffff;
+    --topbar-bg: #ffffff;
+    --border-color: #e2eaf4;
+    --muted-text: #7185a0;
+    --table-header-bg: #f5f8fc;
+}
+
+/* DARK MODE */
+
+body.dark-mode {
+    --body-bg: #101827;
+    --body-text: #e8eef8;
+    --card-bg: #1b2638;
+    --topbar-bg: #172235;
+    --border-color: #334155;
+    --muted-text: #a9b8ce;
+    --table-header-bg: #253247;
+
+    background: var(--body-bg);
+    color: var(--body-text);
+}
+
+/* Main backgrounds */
+
+body.dark-mode .topbar {
+    background: var(--topbar-bg);
+    border-color: var(--border-color);
+}
+
+body.dark-mode .stat-card,
+body.dark-mode .applications,
+body.dark-mode .activity {
+    background: var(--card-bg);
+    border-color: var(--border-color);
+    color: var(--body-text);
+}
+
+body.dark-mode .stat-card h4,
+body.dark-mode .stat-number,
+body.dark-mode .section-title h2,
+body.dark-mode .section-title p,
+body.dark-mode .activity h2,
+body.dark-mode .activity-content strong,
+body.dark-mode .service-name,
+body.dark-mode .application-id {
+    color: var(--body-text);
+}
+
+body.dark-mode .growth,
+body.dark-mode .section-title p,
+body.dark-mode .activity-subtitle,
+body.dark-mode .activity-content span {
+    color: var(--muted-text);
+}
+
+body.dark-mode th {
+    background: var(--table-header-bg);
+    color: #e8eef8;
+}
+
+body.dark-mode td {
+    color: #d5e0ef;
+    border-color: var(--border-color);
+}
+
+body.dark-mode tbody tr:hover {
+    background: #263449;
+}
+
+body.dark-mode .search-box {
+    background: #253247;
+    color: #d5e0ef;
+}
+
+body.dark-mode .search-box input {
+    color: #ffffff;
+}
+
+body.dark-mode .notification,
+body.dark-mode .menu-btn {
+    color: #d5e0ef;
+}
+
+body.dark-mode .quick-body {
+    background: var(--card-bg);
+    color: var(--body-text);
+}
+
+body.dark-mode .quick-link {
+    color: #d5e0ef;
+    border-color: var(--border-color);
+}
+
+body.dark-mode .quick-link:hover {
+    color: #65a8ff;
+}
+
+body.dark-mode .view-btn {
+    background: #253247;
+    color: #d5e0ef;
+    border-color: #42536b;
+}
+
+body.dark-mode footer {
+    border-color: var(--border-color);
+    color: var(--muted-text);
+}
+    </style>
+</head>
+
+
+<body>
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar" id="sidebar">
+
+    <div class="brand">
+
+        <div class="brand-icon">
+            <i class="bi bi-shield-check"></i>
+        </div>
+
+        <div>
+            <h2>GovVerify <span>AI</span></h2>
+            <small>Verify · Apply · Trust</small>
+        </div>
+
+    </div>
+
+
+    <nav class="nav-menu">
+
+        <!-- Dashboard -->
+        <a href="{{ url_for('citizen_dashboard') }}"
+           class="nav-item active">
+
+            <i class="bi bi-house-fill"></i>
+            <span>Dashboard</span>
+
+        </a>
+
+
+        <!-- New Application -->
+        <a href="{{ url_for('application') }}"
+           class="nav-item">
+
+            <i class="bi bi-file-earmark-plus-fill"></i>
+            <span>New Application</span>
+
+        </a>
+
+
+        <!-- My Applications -->
+        <a href="{{ url_for('citizen_dashboard') }}"
+           class="nav-item">
+
+            <i class="bi bi-file-earmark-text-fill"></i>
+            <span>My Applications</span>
+
+        </a>
+
+
+        <!-- Profile -->
+        <a href="{{ url_for('update_profile') }}"
+           class="nav-item">
+
+            <i class="bi bi-person-fill"></i>
+            <span>Profile</span>
+
+        </a>
+
+
+        <a href="{{ url_for('settings') }}" class="nav-item">
+            <i class="bi bi-gear-fill"></i>
+            <span>Settings</span>
+        </a>
+            <i class="bi bi-gear-fill"></i>
+            <span>Settings</span>
+
+        </a>
+
+        <a href="{{ url_for('help_support') }}" class="nav-link">
+            <i class="fas fa-question-circle"></i>
+            Help & Support
+        </a>
+
+    </nav>
+
+
+    <div class="digital-india">
+
+        <i class="bi bi-bank2"></i>
+
+        <strong>Digital India</strong>
+
+        <p>
+            Empowering Citizens<br>
+            with Transparent<br>
+            Services
+        </p>
+
+    </div>
+
+</aside>
+
+
+<!-- ================= MAIN ================= -->
+
+<div class="main">
+
+    <!-- ================= TOPBAR ================= -->
+
+    <header class="topbar">
+
+        <div style="display:flex; align-items:center; gap:18px;">
+
+            <button class="menu-btn"
+                    onclick="toggleSidebar()">
+
+                <i class="bi bi-list"></i>
+
+            </button>
+
+
+            <div class="search-box">
+
+                <i class="bi bi-search"></i>
+
+                <input
+                    type="text"
+                    placeholder="Search applications, services..."
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="profile-area">
+
+            <div class="notification">
+
+                <i class="bi bi-bell"></i>
+
+                <span class="notification-badge">
+                    2
+                </span>
+
+            </div>
+
+
+            <div class="profile">
+
+                <div class="profile-img">
+
+                    <i class="bi bi-person-fill"></i>
+
+                </div>
+
+
+                <div>
+
+                    <div class="profile-name">
+                        {{ user_name }}
+                    </div>
+
+                    <div class="profile-role">
+                        Citizen
+                    </div>
+
+                </div>
+
+                <i class="bi bi-chevron-down"></i>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= CONTENT ================= -->
+
+    <div class="content">
+
+        <div class="dashboard-grid">
+
+
+            <!-- ================= LEFT ================= -->
+
+            <div>
+
+                <!-- HERO -->
+
+                <section class="hero">
+
+                    <h5>
+                        Good Morning,
+                    </h5>
+
+                    <h1>
+                        {{ user_name }} 👋
+                    </h1>
+
+                    <p>
+                        Manage your government applications easily,
+                        quickly and securely with GovVerify AI.
+                    </p>
+
+                    <div class="trust-badge">
+
+                        <i class="bi bi-shield-check"></i>
+
+                        Your trust matters to us
+
+                    </div>
+
+
+                    <div class="hero-graphic">
+
+                        <div class="document-icon">
+
+                            <i class="bi bi-building"></i>
+
+                            <div style="margin-top:15px;">
+
+                                <div style="
+                                    height:5px;
+                                    background:#dbe5f2;
+                                    margin-bottom:8px;
+                                    border-radius:5px;">
+                                </div>
+
+                                <div style="
+                                    height:5px;
+                                    background:#dbe5f2;
+                                    width:75%;
+                                    margin-bottom:8px;
+                                    border-radius:5px;">
+                                </div>
+
+                                <div style="
+                                    height:5px;
+                                    background:#dbe5f2;
+                                    width:55%;
+                                    border-radius:5px;">
+                                </div>
+
+                            </div>
+
+
+                            <div class="check-circle">
+
+                                <i class="bi bi-check-lg"></i>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- ================= STATS ================= -->
+
+                <section class="stats">
+
+                    <!-- Total -->
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon blue">
+                            <i class="bi bi-file-earmark-text"></i>
+                        </div>
+
+                        <h4>Total Applications</h4>
+
+                        <div class="stat-number">
+                            {{ applications|length }}
+                        </div>
+
+                        <div class="growth">
+                            Your submitted applications
+                        </div>
+
+                    </div>
+
+
+                    <!-- Pending -->
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon orange">
+                            <i class="bi bi-clock"></i>
+                        </div>
+
+                        <h4>Pending</h4>
+
+                        <div class="stat-number">
+                            {{ applications | selectattr("status", "equalto", "Submitted") | list | length }}
+                        </div>
+
+                        <div class="growth">
+                            Awaiting review
+                        </div>
+
+                    </div>
+
+
+                    <!-- Verification -->
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon green">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+
+                        <h4>Under Verification</h4>
+
+                        <div class="stat-number">
+                            {{ applications | selectattr("status", "equalto", "Under Verification") | list | length }}
+                        </div>
+
+                        <div class="growth">
+                            Verification in progress
+                        </div>
+
+                    </div>
+
+
+                    <!-- Approved -->
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon purple">
+                            <i class="bi bi-check-circle"></i>
+                        </div>
+
+                        <h4>Approved</h4>
+
+                        <div class="stat-number">
+                            {{ applications | selectattr("status", "equalto", "Approved") | list | length }}
+                        </div>
+
+                        <div class="growth">
+                            Successfully approved
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- ================= APPLICATIONS ================= -->
+
+                <section class="applications">
+
+                    <div class="section-header">
+
+                        <div class="section-title">
+
+                            <div class="section-title-icon">
+
+                                <i class="bi bi-file-earmark-text"></i>
+
+                            </div>
+
+                            <div>
+
+                                <h2>
+                                    My Applications
+                                </h2>
+
+                                <p>
+                                    Track your submitted applications and their status
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <a href="{{ url_for('application') }}"
+                           class="new-btn">
+
+                            <i class="bi bi-plus-lg"></i>
+
+                            New Application
+
+                        </a>
+
+                    </div>
+
+
+                    <div class="table-wrapper">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>Application ID</th>
+
+                                    <th>Service</th>
+
+                                    <th>Date</th>
+
+                                    <th>Status</th>
+
+                                    <th>Risk</th>
+
+                                    <th>Action</th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody>
+
+                            {% for app in applications %}
+
+                                <tr>
+
+                                    <!-- FIXED: application_number -->
+
+                                    <td>
+
+                                        <span class="application-id">
+                                            {{ app.application_number }}
+                                        </span>
+
+                                    </td>
+
+
+                                    <td>
+
+                                        <span class="service-name">
+                                            {{ app.service }}
+                                        </span>
+
+                                        <span class="service-subtitle">
+                                            Government Service
+                                        </span>
+
+                                    </td>
+
+
+                                    <td>
+
+                                        <i class="bi bi-calendar3"></i>
+
+                                        {{ app.created_at }}
+
+                                    </td>
+
+
+                                    <td>
+
+                                        <span class="status">
+                                            {{ app.status }}
+                                        </span>
+
+                                    </td>
+
+
+                                    <td>
+
+                                        <span class="risk">
+                                            {{ app.risk_level }}
+                                        </span>
+
+                                    </td>
+
+
+                                    <td>
+
+                                    <a href="{{ url_for('application_details', application_id=app.id) }}"
+   class="view-btn">
+    View
+</a>
+
+                                    </td>
+
+                                </tr>
+
+
+                            {% else %}
+
+                                <tr>
+
+                                    <td colspan="6"
+                                        style="
+                                        text-align:center;
+                                        padding:35px;
+                                        color:#7890aa;">
+
+                                        <i class="bi bi-folder2-open"
+                                           style="font-size:35px;">
+                                        </i>
+
+                                        <br><br>
+
+                                        No applications submitted yet.
+
+                                    </td>
+
+                                </tr>
+
+                            {% endfor %}
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+
+            <!-- ================= RIGHT SIDE ================= -->
+
+            <div>
+
+                <!-- QUICK ACTIONS -->
+
+                <section class="quick-card">
+
+                    <div class="quick-header">
+
+                        <h2>
+
+                            <i class="bi bi-lightning-charge-fill"></i>
+
+                            Quick Actions
+
+                        </h2>
+
+                        <p>
+                            Get started with your application
+                            in just a few clicks.
+                        </p>
+
+                    </div>
+
+
+                    <div class="quick-body">
+
+                        <!-- New Application -->
+
+                        <a href="{{ url_for('application') }}"
+                           class="quick-link"
+                           style="
+                           background:#216ee8;
+                           color:white;
+                           border-radius:9px;
+                           margin:8px 0;
+                           padding:14px;">
+
+                            <span class="quick-link-left">
+
+                                <span class="quick-icon"
+                                      style="
+                                      background:white;
+                                      color:#216ee8;">
+
+                                    <i class="bi bi-plus-lg"></i>
+
+                                </span>
+
+                                <strong>
+                                    New Application
+                                </strong>
+
+                            </span>
+
+                            <i class="bi bi-chevron-right"></i>
+
+                        </a>
+
+
+                        <!-- View Applications -->
+
+                        <a href="{{ url_for('citizen_dashboard') }}"
+                           class="quick-link">
+
+                            <span class="quick-link-left">
+
+                                <span class="quick-icon">
+
+                                    <i class="bi bi-file-earmark-text"></i>
+
+                                </span>
+
+                                View All Applications
+
+                            </span>
+
+                            <i class="bi bi-chevron-right"></i>
+
+                        </a>
+
+
+                        <!-- Profile -->
+
+                        <a href="{{ url_for('update_profile') }}"
+                           class="quick-link">
+
+                            <span class="quick-link-left">
+
+                                <span class="quick-icon">
+
+                                    <i class="bi bi-person"></i>
+
+                                </span>
+
+                                Update Profile
+
+                            </span>
+
+                            <i class="bi bi-chevron-right"></i>
+
+                        </a>
+
+
+                        <!-- Help -->
+
+                        <a href="#"
+                           class="quick-link">
+
+                            <span class="quick-link-left">
+
+                                <span class="quick-icon">
+
+                                    <i class="bi bi-headset"></i>
+
+                                </span>
+
+                                Help & Support
+
+                            </span>
+
+                            <i class="bi bi-chevron-right"></i>
+
+                        </a>
+
+                    </div>
+
+                </section>
+
+
+                <!-- ================= RECENT ACTIVITY ================= -->
+
+                <section class="activity">
+
+                    <h2>
+
+                        <i class="bi bi-clock-history"></i>
+
+                        Recent Activity
+
+                    </h2>
+
+                    <div class="activity-subtitle">
+                        Latest updates on your applications
+                    </div>
+
+
+                    {% for app in applications[:4] %}
+
+                    <div class="activity-item">
+
+                        <div class="activity-icon green">
+
+                            <i class="bi bi-check-lg"></i>
+
+                        </div>
+
+
+                        <div class="activity-content">
+
+                            <strong>
+                                Application Submitted
+                            </strong>
+
+                            <span>
+                                {{ app.service }}
+                                ({{ app.application_number }})
+                            </span>
+
+                            <span>
+                                {{ app.created_at }}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    {% else %}
+
+                    <div style="
+                        padding:20px 0;
+                        color:#7890aa;
+                        font-size:13px;">
+
+                        No recent activity.
+
+                    </div>
+
+                    {% endfor %}
+
+                </section>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= FOOTER ================= -->
+
+        <footer>
+
+            <div>
+
+                © 2026 GovVerify AI
+                &nbsp; | &nbsp;
+                Government Services
+                &nbsp; | &nbsp;
+                Secure · Transparent · Citizen First
+
+            </div>
+
+            <div>
+
+                Made with ❤️ for a better tomorrow
+
+            </div>
+
+        </footer>
+
+    </div>
+
+</div>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+    function toggleSidebar() {
+
+        const sidebar = document.getElementById("sidebar");
+
+        sidebar.classList.toggle("show");
+
+    }
+    const savedTheme = localStorage.getItem("govverify-theme");
+
+    if (savedTheme === "dark") {
+        document.body.classList.add("dark-mode");
+    }
+
+
+    // Listen for theme changes from settings page
+    window.addEventListener("storage", function () {
+
+        const currentTheme = localStorage.getItem("govverify-theme");
+
+        if (currentTheme === "dark") {
+            document.body.classList.add("dark-mode");
+        } else {
+            document.body.classList.remove("dark-mode");
+        }
+
+    });
+
+</script>
+
+
+</body>
+
+</html>

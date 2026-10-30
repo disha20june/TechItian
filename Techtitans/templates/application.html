@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>New Application | GovVerify AI</title>
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f5f8fc;
+            color: #16345b;
+        }
+
+        /* ================= HEADER ================= */
+
+        .header {
+            height: 75px;
+            background: white;
+            border-bottom: 1px solid #e4ebf4;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 45px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 13px;
+            background: linear-gradient(135deg, #1677ff, #45a8ff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 23px;
+        }
+
+        .brand h2 {
+            font-size: 22px;
+            color: #102d55;
+        }
+
+        .brand h2 span {
+            color: #1775ee;
+        }
+
+        .brand small {
+            display: block;
+            font-size: 11px;
+            color: #7890aa;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            color: #315477;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .back-btn:hover {
+            color: #1469e8;
+        }
+
+        /* ================= MAIN ================= */
+
+        .container {
+            max-width: 1000px;
+            margin: 35px auto;
+            padding: 0 20px;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .page-title h1 {
+            font-size: 32px;
+            color: #102e59;
+            margin-bottom: 8px;
+        }
+
+        .page-title p {
+            color: #7187a1;
+            font-size: 14px;
+        }
+
+        /* ================= STEPS ================= */
+
+        .steps {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+        }
+
+        .step-circle {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: #e5edf7;
+            color: #7187a1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .step.active .step-circle {
+            background: #176ce5;
+            color: white;
+        }
+
+        .step.completed .step-circle {
+            background: #20ae70;
+            color: white;
+        }
+
+        .step-label {
+            margin-left: 8px;
+            font-size: 12px;
+            color: #7086a2;
+            font-weight: 600;
+        }
+
+        .step.active .step-label {
+            color: #176ce5;
+        }
+
+        .line {
+            width: 70px;
+            height: 2px;
+            background: #dce5f0;
+            margin: 0 12px;
+        }
+
+        /* ================= CARD ================= */
+
+        .form-card {
+            background: white;
+            border: 1px solid #e0e8f2;
+            border-radius: 17px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(30, 65, 100, 0.06);
+        }
+
+        .form-section {
+            display: none;
+        }
+
+        .form-section.active {
+            display: block;
+        }
+
+        .section-heading {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            margin-bottom: 25px;
+        }
+
+        .section-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            background: #e6f1ff;
+            color: #176ce5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 21px;
+        }
+
+        .section-heading h2 {
+            font-size: 20px;
+            color: #18385f;
+        }
+
+        .section-heading p {
+            font-size: 12px;
+            color: #7890aa;
+            margin-top: 3px;
+        }
+
+        /* ================= FORM ================= */
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #29496d;
+        }
+
+        .required {
+            color: #e33d4f;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            border: 1px solid #d8e3ef;
+            border-radius: 9px;
+            padding: 12px 14px;
+            outline: none;
+            font-family: inherit;
+            font-size: 14px;
+            color: #203e62;
+            background: white;
+            transition: 0.2s;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #4c91ed;
+            box-shadow: 0 0 0 3px rgba(23, 108, 229, 0.08);
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        /* ================= SERVICE ================= */
+
+        .service-info {
+            background: #f3f8ff;
+            border: 1px solid #dceaff;
+            border-radius: 11px;
+            padding: 15px;
+            margin-bottom: 25px;
+            display: flex;
+            gap: 12px;
+        }
+
+        .service-info i {
+            color: #176ce5;
+            font-size: 22px;
+        }
+
+        .service-info strong {
+            display: block;
+            font-size: 13px;
+            color: #214568;
+            margin-bottom: 4px;
+        }
+
+        .service-info span {
+            font-size: 12px;
+            color: #7187a1;
+        }
+
+        /* ================= UPLOAD ================= */
+
+        .upload-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .upload-box {
+            border: 2px dashed #ccd9e8;
+            border-radius: 13px;
+            padding: 22px 15px;
+            text-align: center;
+            transition: 0.2s;
+        }
+
+        .upload-box:hover {
+            border-color: #3985ed;
+            background: #f8fbff;
+        }
+
+        .upload-icon {
+            width: 50px;
+            height: 50px;
+            margin: auto auto 12px;
+            border-radius: 50%;
+            background: #eaf3ff;
+            color: #176ce5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 23px;
+        }
+
+        .upload-box h3 {
+            font-size: 14px;
+            color: #29496d;
+            margin-bottom: 6px;
+        }
+
+        .upload-box p {
+            font-size: 11px;
+            color: #8193a8;
+            margin-bottom: 13px;
+        }
+
+        .file-input {
+            font-size: 11px;
+            padding: 7px;
+        }
+
+        .upload-note {
+            margin-top: 20px;
+            padding: 13px;
+            border-radius: 9px;
+            background: #fff8e8;
+            color: #86631d;
+            font-size: 12px;
+        }
+
+        /* ================= REVIEW ================= */
+
+        .review-box {
+            background: #f7faff;
+            border: 1px solid #dfe9f5;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .review-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 11px 0;
+            border-bottom: 1px solid #e7edf4;
+            font-size: 13px;
+        }
+
+        .review-row:last-child {
+            border-bottom: none;
+        }
+
+        .review-label {
+            color: #7187a1;
+        }
+
+        .review-value {
+            color: #234568;
+            font-weight: 600;
+            text-align: right;
+        }
+
+        .consent {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            background: #f0f8f4;
+            border: 1px solid #d6eee1;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .consent input {
+            width: auto;
+            margin-top: 3px;
+        }
+
+        .consent label {
+            margin: 0;
+            font-size: 12px;
+            line-height: 1.5;
+            font-weight: 500;
+        }
+
+        /* ================= BUTTONS ================= */
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 28px;
+            padding-top: 22px;
+            border-top: 1px solid #e8eef5;
+        }
+
+        .btn {
+            border: none;
+            border-radius: 9px;
+            padding: 12px 22px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-back {
+            background: #eef3f8;
+            color: #49637e;
+        }
+
+        .btn-back:hover {
+            background: #e3ebf4;
+        }
+
+        .btn-next,
+        .btn-submit {
+            background: linear-gradient(90deg, #1469e8, #287cf0);
+            color: white;
+        }
+
+        .btn-next:hover,
+        .btn-submit:hover {
+            box-shadow: 0 7px 18px rgba(20, 105, 232, 0.25);
+        }
+
+        /* ================= SECURITY ================= */
+
+        .security {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 25px;
+            color: #7187a1;
+            font-size: 11px;
+        }
+
+        .security span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .security i {
+            color: #22a66c;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 700px) {
+
+            .header {
+                padding: 0 18px;
+            }
+
+            .brand h2 {
+                font-size: 18px;
+            }
+
+            .container {
+                margin: 25px auto;
+            }
+
+            .page-title h1 {
+                font-size: 26px;
+            }
+
+            .step-label {
+                display: none;
+            }
+
+            .line {
+                width: 35px;
+                margin: 0 7px;
+            }
+
+            .form-card {
+                padding: 20px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .upload-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .buttons {
+                gap: 10px;
+            }
+
+            .security {
+                flex-direction: column;
+                align-items: center;
+                gap: 8px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header class="header">
+
+    <div class="brand">
+
+        <div class="brand-icon">
+            <i class="bi bi-shield-check"></i>
+        </div>
+
+        <div>
+            <h2>GovVerify <span>AI</span></h2>
+            <small>Smarter Verification. Faster Service.</small>
+        </div>
+
+    </div>
+
+    <a href="{{ url_for('citizen_dashboard') }}"
+       class="back-btn">
+
+        <i class="bi bi-arrow-left"></i>
+        Back to Dashboard
+
+    </a>
+
+</header>
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="container">
+
+    <div class="page-title">
+
+        <h1>New Government Application</h1>
+
+        <p>
+            Submit your application securely through GovVerify AI
+        </p>
+
+    </div>
+
+
+    <!-- ================= STEPS ================= -->
+
+    <div class="steps">
+
+        <div class="step active" id="stepIndicator1">
+
+            <div class="step-circle">
+                1
+            </div>
+
+            <span class="step-label">
+                Application
+            </span>
+
+        </div>
+
+
+        <div class="line"></div>
+
+
+        <div class="step" id="stepIndicator2">
+
+            <div class="step-circle">
+                2
+            </div>
+
+            <span class="step-label">
+                Documents
+            </span>
+
+        </div>
+
+
+        <div class="line"></div>
+
+
+        <div class="step" id="stepIndicator3">
+
+            <div class="step-circle">
+                3
+            </div>
+
+            <span class="step-label">
+                Review
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= FORM ================= -->
+
+    <form method="POST"
+          enctype="multipart/form-data"
+          id="applicationForm">
+
+
+        <div class="form-card">
+
+
+            <!-- ================= STEP 1 ================= -->
+
+            <section class="form-section active"
+                     id="section1">
+
+                <div class="section-heading">
+
+                    <div class="section-icon">
+                        <i class="bi bi-file-earmark-text"></i>
+                    </div>
+
+                    <div>
+
+                        <h2>Application Details</h2>
+
+                        <p>
+                            Select the government service you want to apply for
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="service-info">
+
+                    <i class="bi bi-info-circle"></i>
+
+                    <div>
+
+                        <strong>
+                            Choose the correct service
+                        </strong>
+
+                        <span>
+                            Your selected service determines the documents
+                            required for verification.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Government Service
+                        <span class="required">*</span>
+                    </label>
+
+                    <select name="service"
+                            id="service"
+                            required>
+
+                        <option value="">
+                            Select a service
+                        </option>
+
+                        <option value="Income Certificate">
+                            Income Certificate
+                        </option>
+
+                        <option value="Residence Certificate">
+                            Residence Certificate
+                        </option>
+
+                        <option value="Caste Certificate">
+                            Caste Certificate
+                        </option>
+
+                        <option value="Domicile Certificate">
+                            Domicile Certificate
+                        </option>
+
+                        <option value="Scholarship Application">
+                            Scholarship Application
+                        </option>
+
+                        <option value="Government Scheme">
+                            Government Scheme
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label>
+                            Applicant Name
+                            <span class="required">*</span>
+                        </label>
+
+                        <input type="text"
+                               id="applicantName"
+                               placeholder="Enter your name"
+                               required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Contact Number
+                            <span class="required">*</span>
+                        </label>
+
+                        <input type="tel"
+                               placeholder="Enter contact number"
+                               required>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Application Purpose
+                    </label>
+
+                    <textarea
+                        placeholder="Briefly describe the purpose of your application"></textarea>
+
+                </div>
+
+
+                <div class="buttons">
+
+                    <div></div>
+
+                    <button type="button"
+                            class="btn btn-next"
+                            onclick="nextStep(2)">
+
+                        Continue
+                        <i class="bi bi-arrow-right"></i>
+
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= STEP 2 ================= -->
+
+            <section class="form-section"
+                     id="section2">
+
+                <div class="section-heading">
+
+                    <div class="section-icon">
+                        <i class="bi bi-cloud-arrow-up"></i>
+                    </div>
+
+                    <div>
+
+                        <h2>Upload Documents</h2>
+
+                        <p>
+                            Upload supporting documents for verification
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="upload-grid">
+
+
+                    <!-- Identity -->
+
+                    <div class="upload-box">
+
+                        <div class="upload-icon">
+
+                            <i class="bi bi-person-vcard"></i>
+
+                        </div>
+
+                        <h3>
+                            Identity Proof
+                        </h3>
+
+                        <p>
+                            Upload a sample identity document
+                        </p>
+
+                        <input type="file"
+                               name="identity_proof"
+                               class="file-input"
+                               accept=".pdf,.jpg,.jpeg,.png">
+
+                    </div>
+
+
+                    <!-- Address -->
+
+                    <div class="upload-box">
+
+                        <div class="upload-icon">
+
+                            <i class="bi bi-geo-alt"></i>
+
+                        </div>
+
+                        <h3>
+                            Address Proof
+                        </h3>
+
+                        <p>
+                            Upload a sample address document
+                        </p>
+
+                        <input type="file"
+                               name="address_proof"
+                               class="file-input"
+                               accept=".pdf,.jpg,.jpeg,.png">
+
+                    </div>
+
+
+                    <!-- Income -->
+
+                    <div class="upload-box">
+
+                        <div class="upload-icon">
+
+                            <i class="bi bi-cash-stack"></i>
+
+                        </div>
+
+                        <h3>
+                            Income Proof
+                        </h3>
+
+                        <p>
+                            Upload a sample income document
+                        </p>
+
+                        <input type="file"
+                               name="income_proof"
+                               class="file-input"
+                               accept=".pdf,.jpg,.jpeg,.png">
+
+                    </div>
+
+                </div>
+
+
+                <div class="upload-note">
+
+                    <i class="bi bi-shield-lock"></i>
+
+                    <strong> Demo/Sample Data:</strong>
+                    For this project, use fictional sample documents only.
+                    Do not upload real identity documents.
+
+                </div>
+
+
+                <div class="buttons">
+
+                    <button type="button"
+                            class="btn btn-back"
+                            onclick="nextStep(1)">
+
+                        <i class="bi bi-arrow-left"></i>
+                        Back
+
+                    </button>
+
+
+                    <button type="button"
+                            class="btn btn-next"
+                            onclick="prepareReview()">
+
+                        Review Application
+                        <i class="bi bi-arrow-right"></i>
+
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= STEP 3 ================= -->
+
+            <section class="form-section"
+                     id="section3">
+
+                <div class="section-heading">
+
+                    <div class="section-icon">
+
+                        <i class="bi bi-check2-circle"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h2>Review & Submit</h2>
+
+                        <p>
+                            Check your information before submitting
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="review-box">
+
+                    <div class="review-row">
+
+                        <span class="review-label">
+                            Government Service
+                        </span>
+
+                        <span class="review-value"
+                              id="reviewService">
+                            -
+                        </span>
+
+                    </div>
+
+
+                    <div class="review-row">
+
+                        <span class="review-label">
+                            Applicant
+                        </span>
+
+                        <span class="review-value"
+                              id="reviewName">
+                            -
+                        </span>
+
+                    </div>
+
+
+                    <div class="review-row">
+
+                        <span class="review-label">
+                            Identity Proof
+                        </span>
+
+                        <span class="review-value"
+                              id="reviewIdentity">
+                            Not selected
+                        </span>
+
+                    </div>
+
+
+                    <div class="review-row">
+
+                        <span class="review-label">
+                            Address Proof
+                        </span>
+
+                        <span class="review-value"
+                              id="reviewAddress">
+                            Not selected
+                        </span>
+
+                    </div>
+
+
+                    <div class="review-row">
+
+                        <span class="review-label">
+                            Income Proof
+                        </span>
+
+                        <span class="review-value"
+                              id="reviewIncome">
+                            Not selected
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="consent">
+
+                    <input type="checkbox"
+                           id="consent"
+                           required>
+
+                    <label for="consent">
+
+                        I confirm that the information provided is
+                        accurate and I am submitting this application
+                        for demonstration/testing purposes.
+
+                    </label>
+
+                </div>
+
+
+                <div class="buttons">
+
+                    <button type="button"
+                            class="btn btn-back"
+                            onclick="nextStep(2)">
+
+                        <i class="bi bi-arrow-left"></i>
+                        Back
+
+                    </button>
+
+
+                    <button type="submit"
+                            class="btn btn-submit">
+
+                        <i class="bi bi-send"></i>
+
+                        Submit Application
+
+                    </button>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </form>
+
+
+    <!-- ================= SECURITY ================= -->
+
+    <div class="security">
+
+        <span>
+            <i class="bi bi-shield-check"></i>
+            Secure Submission
+        </span>
+
+        <span>
+            <i class="bi bi-lock"></i>
+            Protected Data
+        </span>
+
+        <span>
+            <i class="bi bi-eye"></i>
+            Transparent Process
+        </span>
+
+    </div>
+
+</main>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+    function nextStep(step) {
+
+        // Hide all sections
+        document.querySelectorAll(".form-section")
+            .forEach(function(section) {
+                section.classList.remove("active");
+            });
+
+
+        // Show selected section
+        document.getElementById("section" + step)
+            .classList.add("active");
+
+
+        // Update indicators
+        for (let i = 1; i <= 3; i++) {
+
+            const indicator =
+                document.getElementById("stepIndicator" + i);
+
+            indicator.classList.remove("active");
+            indicator.classList.remove("completed");
+
+            if (i < step) {
+
+                indicator.classList.add("completed");
+
+            } else if (i === step) {
+
+                indicator.classList.add("active");
+
+            }
+        }
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    }
+
+
+    function prepareReview() {
+
+        const service =
+            document.getElementById("service").value;
+
+        const applicantName =
+            document.getElementById("applicantName").value;
+
+
+        // Validate service
+        if (!service) {
+
+            alert("Please select a government service.");
+
+            nextStep(1);
+
+            return;
+        }
+
+
+        // Validate name
+        if (!applicantName) {
+
+            alert("Please enter applicant name.");
+
+            nextStep(1);
+
+            return;
+        }
+
+
+        // Show review information
+        document.getElementById("reviewService")
+            .textContent = service;
+
+        document.getElementById("reviewName")
+            .textContent = applicantName;
+
+
+        // Get files
+        const identity =
+            document.querySelector(
+                'input[name="identity_proof"]'
+            );
+
+        const address =
+            document.querySelector(
+                'input[name="address_proof"]'
+            );
+
+        const income =
+            document.querySelector(
+                'input[name="income_proof"]'
+            );
+
+
+        document.getElementById("reviewIdentity")
+            .textContent =
+            identity.files.length
+                ? identity.files[0].name
+                : "Not selected";
+
+
+        document.getElementById("reviewAddress")
+            .textContent =
+            address.files.length
+                ? address.files[0].name
+                : "Not selected";
+
+
+        document.getElementById("reviewIncome")
+            .textContent =
+            income.files.length
+                ? income.files[0].name
+                : "Not selected";
+
+
+        nextStep(3);
+    }
+
+</script>
+
+</body>
+
+</html>

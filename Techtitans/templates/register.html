@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="auth-container">
+
+    <div class="auth-card">
+
+        <div class="text-center mb-4">
+
+            <div class="logo-icon">
+                🛡️
+            </div>
+
+            <h2>Create Account</h2>
+
+            <p class="text-muted">
+                Join GovVerify AI
+            </p>
+
+        </div>
+
+
+        <form method="POST">
+
+            <div class="mb-3">
+
+                <label>Full Name</label>
+
+                <input
+                    type="text"
+                    name="full_name"
+                    class="form-control"
+                    placeholder="Enter full name"
+                    required>
+
+            </div>
+
+
+            <div class="mb-3">
+
+                <label>Email</label>
+
+                <input
+                    type="email"
+                    name="email"
+                    class="form-control"
+                    placeholder="Enter email"
+                    required>
+
+            </div>
+
+
+            <div class="mb-3">
+
+                <label>Password</label>
+
+                <input
+                    type="password"
+                    name="password"
+                    class="form-control"
+                    placeholder="Create password"
+                    required>
+
+            </div>
+
+
+           
+               <div class="mb-3">
+                <label>Confirm Password</label>
+
+                <input 
+                    type="password" 
+                    name="confirm_password" 
+                    class="form-control" 
+                    placeholder="Confirm password" 
+                    required>
+            </div>
+
+
+            <!-- Role Selection -->
+            <div class="mb-3">
+                <label for="role" class="form-label">
+                    You are registering as:
+                </label>
+
+                <select name="role" id="role" class="form-select" required>
+                    <option value="">Select your role</option>
+                    <option value="citizen">Citizen</option>
+                    <option value="officer">Officer</option>
+                </select>
+            </div>
+
+
+            <!-- Department Selection -->
+            <div class="mb-3" id="departmentBox" style="display: none;">
+                <label for="department" class="form-label">
+                    Select Department
+                </label>
+
+                <select name="department" id="department" class="form-select">
+                    <option value="">Select department</option>
+                    <option value="Revenue Department">Revenue Department</option>
+                    <option value="Education Department">Education Department</option>
+                    <option value="Health Department">Health Department</option>
+                    <option value="Transport Department">Transport Department</option>
+                    <option value="Municipal Department">Municipal Department</option>
+                </select>
+            </div>
+
+
+            <button 
+                type="submit" 
+                class="btn btn-primary w-100">
+
+                Create Account
+
+            </button>
+
+
+        </form>
+<script>
+    const roleSelect = document.getElementById("role");
+    const departmentBox = document.getElementById("departmentBox");
+    const departmentSelect = document.getElementById("department");
+
+    roleSelect.addEventListener("change", function () {
+        if (this.value === "officer") {
+            departmentBox.style.display = "block";
+            departmentSelect.required = true;
+        } else {
+            departmentBox.style.display = "none";
+            departmentSelect.required = false;
+            departmentSelect.value = "";
+        }
+    });
+</script>
+
+        <p class="text-center mt-4">
+
+            Already have an account?
+
+            <a href="{{ url_for('login') }}">
+                Login
+            </a>
+
+        </p>
+
+    </div>
+
+</div>
+
+{% endblock %}

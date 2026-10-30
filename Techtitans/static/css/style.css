@@ -1,0 +1,194 @@
+body {
+    background: #f5f7fb;
+    font-family: Arial, sans-serif;
+    color: #17233c;
+}
+
+
+/* Navbar */
+
+.navbar {
+    background: #102a56;
+    padding: 15px 0;
+}
+
+.navbar-brand {
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.navbar-brand span {
+    color: #7c5cff;
+}
+
+
+/* Buttons */
+
+.btn-primary {
+    background: #285ecf;
+    border: none;
+    padding: 10px 20px;
+}
+
+.btn-primary:hover {
+    background: #194cae;
+}
+
+
+/* Authentication */
+
+.auth-container {
+    min-height: 90vh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+.auth-card {
+    width: 420px;
+
+    background: white;
+
+    padding: 35px;
+
+    border-radius: 15px;
+
+    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+}
+
+.auth-card h2 {
+    font-weight: 700;
+}
+
+.auth-card h2 span {
+    color: #7157d9;
+}
+
+.logo-icon {
+    font-size: 45px;
+}
+
+
+/* Forms */
+
+.form-control,
+.form-select {
+    padding: 12px;
+
+    border-radius: 8px;
+
+    border: 1px solid #dce1eb;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #285ecf;
+
+    box-shadow: none;
+}
+
+
+/* Dashboard */
+
+.dashboard {
+    padding-top: 40px;
+
+    padding-bottom: 60px;
+}
+
+
+.stat-card {
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 14px;
+
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+.stat-card h6 {
+    color: #6c7485;
+
+    margin-bottom: 10px;
+}
+
+.stat-card h2 {
+    font-weight: 700;
+}
+
+
+/* Cards */
+
+.dashboard-card {
+    border: none;
+
+    border-radius: 15px;
+
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+
+/* Empty state */
+
+.empty-state {
+    text-align: center;
+
+    padding: 60px 20px;
+
+    color: #687286;
+}
+
+.empty-icon {
+    font-size: 50px;
+
+    margin-bottom: 15px;
+}
+
+
+/* Application */
+
+.application-page {
+    padding-top: 40px;
+
+    padding-bottom: 60px;
+}
+
+.section-title {
+    margin-bottom: 20px;
+
+    font-weight: 700;
+
+    color: #102a56;
+}
+
+
+/* Table */
+
+.table th {
+    color: #687286;
+
+    font-weight: 600;
+}
+
+.table td {
+    padding: 16px 10px;
+}
+
+
+/* Responsive */
+
+@media (max-width: 768px) {
+
+    .auth-card {
+        width: 90%;
+    }
+
+    .dashboard {
+        padding-top: 25px;
+    }
+
+}
